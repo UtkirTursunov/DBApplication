@@ -195,7 +195,7 @@
             ExecuteNonQuery(connectionString, queryChangeColName);
             Console.WriteLine($"{oldColumnName} column has been renamed to {newColumnName} successfully");
         }
-
+        
         public static void AddColumn(string connectionString, string selectedTable)
         {
             Console.Clear();
