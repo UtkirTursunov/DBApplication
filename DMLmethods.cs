@@ -10,7 +10,6 @@ namespace DBApplicatiom
             Console.WriteLine($"Displaying data from table '{tableName}'");
 
             var columns = SELECTmethods.GetColumnsWithTypes(connectionString, tableName);
-            SELECTmethods.PrintFormattedColumns(columns);
             var query = $"SELECT * from \"{tableName}\";";
 
             using var connection = new NpgsqlConnection(connectionString);
@@ -18,12 +17,12 @@ namespace DBApplicatiom
             using var command = new NpgsqlCommand(query, connection);
             using var reader = command.ExecuteReader();
 
-            int firstColumnWidth = 4; 
-            int otherColumnWidth = 15; 
+            int firstColumnWidth = 4;
+            int otherColumnWidth = 15;
 
             foreach (var column in columns.Keys)
             {
-                if (column == "id") 
+                if (column == "id")
                 {
                     Console.Write(column.PadRight(firstColumnWidth));
                 }
@@ -38,7 +37,7 @@ namespace DBApplicatiom
             {
                 foreach (var column in columns.Keys)
                 {
-                    if (column == "id") 
+                    if (column == "id")
                     {
                         Console.Write(reader[column].ToString().PadRight(firstColumnWidth));
                     }
@@ -104,7 +103,7 @@ namespace DBApplicatiom
                         if (key.Key == ConsoleKey.Escape)
                         {
                             Console.WriteLine("\nInsert operation cancelled.");
-                            return; 
+                            return;
                         }
                         else if (key.Key == ConsoleKey.Enter)
                         {
@@ -156,7 +155,7 @@ namespace DBApplicatiom
             command.ExecuteNonQuery();
             Console.WriteLine("Data inserted successfully.");
         }
-       
+
         public static void UpdateData(string connectionString, string tableName)
         {
             Console.Clear();
@@ -189,6 +188,7 @@ namespace DBApplicatiom
             Console.Clear();
             Console.WriteLine($"Deleting data from table '{tableName}'.");
 
+            DisplayTable(connectionString, tableName);
             Console.Write("Enter the ID of the record to delete: ");
             string id = Console.ReadLine();
 

@@ -66,15 +66,6 @@ namespace DBApplicatiom
             return columnsWithTypes;
         }
 
-        public static void PrintFormattedColumns(Dictionary<string, string> columnsWithTypes)
-        {
-            var columnNames = new List<string>(columnsWithTypes.Keys);
-            var columnTypes = new List<string>(columnsWithTypes.Values);
-
-            int columnNameWidth = Math.Max("Column Name".Length, columnNames.Max(name => name.Length));
-            int columnTypeWidth = Math.Max("Data Type".Length, columnTypes.Max(type => type.Length));
-        }
-
         public static bool ColumnExists(string connectionString, string tableName, string columnName)
         {
             string query = $"SELECT COUNT(*) FROM information_schema.columns WHERE table_name = @tableName AND column_name = @columnName;";
